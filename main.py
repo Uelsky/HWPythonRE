@@ -1,5 +1,5 @@
 import csv
-from funcs import check_phone, check_name
+from funcs import check_phone, check_name, merge_contacts
 from contact import Contact
 
 
@@ -10,7 +10,6 @@ with open("phonebook_raw.csv", encoding="utf-8") as f:
 contacts = list()
 for i in range(1, len(contacts_list)):
     name = check_name(contacts_list[i])
-
     lastname = name[0]
     firstname = name[1]
     surname = name[2]
@@ -33,16 +32,7 @@ for i in range(len(contacts) - 1):
     for j in range(i + 1, len(contacts)):
         if contacts[i].status == 1:
             if contacts[i] == contacts[j]:
-                if contacts[j].surname != '':
-                    contacts[i].surname = contacts[j].surname
-                if contacts[j].organization != '':
-                    contacts[i].organization = contacts[j].organization
-                if contacts[j].position != '':
-                    contacts[i].position = contacts[j].position
-                if contacts[j].phone != '':
-                    contacts[i].phone = contacts[j].phone
-                if contacts[j].email != '':
-                    contacts[i].email = contacts[j].email
+                merge_contacts(contacts[i], contacts[j])
                 contacts[j].status = 0
 
 list_for_write = list()

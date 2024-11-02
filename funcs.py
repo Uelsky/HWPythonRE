@@ -62,3 +62,12 @@ def check_name(contact: list) -> tuple:
         surname = c[0]
 
     return lastname, firstname, surname
+
+
+def merge_contacts(contact_a, contact_b):
+    """Сливает данные двух контактов, выбирая непустые поля."""
+    contact_a.surname = contact_b.surname or contact_a.surname
+    contact_a.organization = contact_b.organization or contact_a.organization
+    contact_a.position = contact_b.position or contact_a.position
+    contact_a.phone = contact_b.phone or contact_a.phone
+    contact_a.email = contact_b.email or contact_a.email
